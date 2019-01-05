@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Store Home</title>
+    <title>CyberSystems - Store</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,13 +18,8 @@
     <link href="css/shop-homepage.css" rel="stylesheet">
 
 	<link href="stylesheet.css" rel="stylesheet" type="text/css">
+	<link rel="icon" href="assets/dragon.png">
 	
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 <br>
 </head>
 
@@ -32,27 +27,23 @@
 
 <?php
 include("config.php");
-include("header.php");
-/*
-$sql = "Select ProductName, ProductType, Price FROM Product";
-$result = $conn->query($sql);
+#include("header.php");
 
-if ($result->num_rows > 0) {
-    echo "<table><tr><th>ID</th><th>Name</th></tr>";
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["ProductName"]."</td><td>".$row["ProductType"]." ".$row["Price"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
+
+session_start();
+
+if(isset($_SESSION['id'])){
+    require_once("headerloggedin.php");
+}else{  
+    require_once("headershop.php");
 }
-$conn->close();
-*/
+
+$productlist = mysqli_query($conn,"SELECT * FROM product ORDER BY RAND() LIMIT 6");
+$pic = "assets\productimages\FinalPictures320x150\\";
 ?>
 
 <body>
-
+<br><br>
     <!-- Page Content -->
     <div class="container">
 
@@ -61,11 +52,12 @@ $conn->close();
             <div class="col-md-3">
                 <p class="lead">CyberSystems Online Store</p>
                 <div class="list-group">
-                    <a href="productlist.php" class="list-group-item">Desktops</a>
-                    <a href="productlist.php" class="list-group-item">Laptops</a>
-                    <a href="productlist.php" class="list-group-item">Hardware</a>
-					<a href="productlist.php" class="list-group-item">Monitors</a>
-					<a href="productlist.php" class="list-group-item">Peripherals</a>
+					<a href="productlist.php?cat=All" class="list-group-item">All</a>
+                    <a href="productlist.php?cat=Desktops" class="list-group-item">Desktops</a>
+                    <a href="productlist.php?cat=Laptops" class="list-group-item">Laptops and Tablets</a>
+                    <a href="productlist.php?cat=Hardware" class="list-group-item">Hardware</a>
+					<a href="productlist.php?cat=Monitors" class="list-group-item">Monitors and Displays</a>
+					<a href="productlist.php?cat=Peripherals" class="list-group-item">Peripherals</a>
                 </div>
             </div>
 
@@ -101,80 +93,32 @@ $conn->close();
                     </div>
 
                 </div>
+				<br><br>
+				
+				
 
                 <div class="row">
-
+					<?php while($product = mysqli_fetch_array($productlist)):?>
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\computerSet01 320X150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\monitor01-320x150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£64.99</h4>
-                                <h4><a href="#">Second Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\monitor02 320x150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£74.99</h4>
-                                <h4><a href="#">Third Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\wireless-mouse01 320x150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£84.99</h4>
-                                <h4><a href="#">Fourth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\computerSet01 320X150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£94.99</h4>
-                                <h4><a href="#">Fifth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="assets\productimages\computerSet01 320X150.jpg" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">£94.99</h4>
-                                <h4><a href="#">Sixth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
+						<div class="thumbnail">
+						<h4 align="center"><?php echo $product['Product_Name']; ?></h4>
+							<a href="product.php?id=<?php echo $product['ProductID']; ?>&cat=Featured"><img src="<?php echo $pic.$product['Image']; ?>" alt=""></a>
+							<div class="caption">
+								<span>£ <?php echo $product['Price']; ?></span>
+								<p><?php echo $product['Description']; ?></p>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									
+								</div>
+								<div class="col-md-6">
+									<a href="php scripts/addToCart.php?id= <?php echo $product ['ProductID']?>" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
+								</div>
+							</div><br><br>
+						</div>
+					</div>
+					
+					<?php endwhile; ?>
 
                 </div>
 
@@ -197,7 +141,6 @@ $conn->close();
         </footer>
 
     </div>
-    <!-- /.container -->
 
    
 <script>

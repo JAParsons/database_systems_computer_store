@@ -1,8 +1,13 @@
  <!-- Footer -->
         <footer>
 			<div class="container-fluid text-center">
-				<a href="#myPage" title="To Top">
-					<span class="glyphicon glyphicon-chevron-up"></span>
+				<!-- <a href="#myPage" title="To Top"> -->
+				
+				<a id="back-to-top" href="#" class="glyphicon glyphicon-chevron-up"> 
+				
+				
+				
+					
 				</a>
 			</div>
             <div class="text-center">

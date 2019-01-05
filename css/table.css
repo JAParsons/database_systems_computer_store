@@ -1,0 +1,43 @@
+ table
+ {
+		width:75%;
+		margin:auto;
+		text-align:left;
+		
+		border-collapse:collapse; 
+		padding: 15px;
+		overflow-y:auto;
+		
+}
+
+	
+tbody td
+{
+		
+		padding: 10px;
+}
+
+td {width:1px;
+	table-layout:fixed;
+word-wrap:break-word;}
+
+tbody tr:nth-child(odd){
+  background-color: #babbbc;
+  color: black;
+  
+}
+
+tbody tr:nth-child(even){
+  background-color: #dbdee0;
+  color: black;
+  
+ 
+}
+
+tbody th{
+	background-color: #d0112b;
+	color: white;
+	padding: 12px;
+	
+}
+	

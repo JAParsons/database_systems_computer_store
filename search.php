@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 	<link rel="icon" href="assets/dragon.png">
-<br><br>
+<br><br><br><br>
 </head>
 
 <?php
@@ -31,30 +31,26 @@ if(isset($_SESSION['id'])){
 }else{  
     require_once("headershop.php");
 }
-
-$cat = trim($_GET['cat']);
-
-if($cat == "All"){$productlist = mysqli_query($conn,"SELECT * FROM product ORDER BY Product_Name");}
-elseif($cat == "Desktops"){$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Type = 'Desktops' ORDER BY Product_Name");}
-elseif($cat == "Laptops"){$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Type = 'Laptop' ORDER BY Product_Name");}
-elseif($cat == "Hardware"){$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Type = 'Hardware' ORDER BY Product_Name");}
-elseif($cat == "Monitors"){$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Type = 'Monitors' ORDER BY Product_Name");}
-elseif($cat == "Peripherals"){$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Type = 'Peripherals' ORDER BY Product_Name");}
+$temp = trim($_GET['input']);
+$search = trim($_GET['input'])."%";
+$search2 = "%".trim($_GET['input']);
+$search3 = "%".trim($_GET['input'])."%";
+$productlist = mysqli_query($conn,"SELECT * FROM product WHERE Product_Name LIKE '$search' OR Product_Name LIKE '$search2' OR Product_Name LIKE '$search3' ORDER BY Product_Name");
 $pic = "assets\productimages\FinalPictures320x150\\";
 ?>
 
 <body>
 
-<h2 align="center"><?php echo($cat) ?></h2>
-<br>
+<h2 align="center"> Results for "<?php echo($temp) ?>"</h2>
 
 <div class="container">
 
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="store.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo($cat) ?></li>
+                <li class="breadcrumb-item active" aria-current="page">"<?php echo($temp) ?>"</li>
               </ol>
 </div>
+
 
 <div class="container">
 <?php while($product = mysqli_fetch_array($productlist)):?>
@@ -65,13 +61,14 @@ $pic = "assets\productimages\FinalPictures320x150\\";
             <a href="product.php?id=<?php echo $product['ProductID']; ?>&cat=<?php echo $cat; ?>"><img src="<?php echo $pic.$product['Image']; ?>" alt=""></a>
             <div class="caption">
 				<p>£ <?php echo $product['Price']; ?></p>
-                <p><?php echo $product['Description']; ?> <a target="" href=""></a>.</p>
+
             </div>
 			<div class="row">
 							<div class="col-md-6">
 								
 							</div>
-							<div class="col-md-6"><a href="php scripts/addToCart.php?id= <?php echo $product ['ProductID']?>" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a></div>
+							<div class="col-md-6">
+								<a href="basket.php" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a></div>
 						</div>
         </div><br><br>
     </div>
